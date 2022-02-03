@@ -14,9 +14,36 @@ def load_employee_file_into_array():
 
 def sort_by_forename():
     print('Sorting by forename')
+    swaps = True
+    while swaps:
+    # Put in value of swaps before the algorithm has worked through the list comparing descriptions
+    #
+    # Work through the list
+        swap = False
+        for position in range(0,len(employee_list)-1):
+            # If the description of list[position] is greater (alphabetically) that list[position+1]
+            if employee_list[position].get_employee_forename() > employee_list[position+1].get_employee_forename():
+                swaps = True
+                temp = employee_list[position]
+                employee_list[position] = employee_list[position+1]
+                employee_list[position +1] = temp
+
 
 def sort_by_surname():
     print('Sorting by surname')
+    swaps = True
+    while swaps:
+    # Put in value of swaps before the algorithm has worked through the list comparing descriptions
+    #
+    # Work through the list
+        swap = False
+        for position in range(0,len(employee_list)-1):
+            # If the description of list[position] is greater (alphabetically) that list[position+1]
+            if employee_list[position].get_employee_surname() > employee_list[position+1].get_employee_surname():
+                swaps = True
+                temp = employee_list[position]
+                employee_list[position] = employee_list[position+1]
+                employee_list[position +1] = temp
 
 def find_by_name():
     surname = txt_surname.get()
@@ -34,7 +61,7 @@ def find_by_name():
         else:
             employee_in_list += 1
 
-    lst_results.insert(1,"Working")
+    lst_results.insert(1,employee_list[employee_in_list].get_mobile_number())
 
 
 def backup():

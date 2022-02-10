@@ -14,12 +14,13 @@ def load_employee_file_into_array():
 
 def sort_by_forename():
     print('Sorting by forename')
+    lst_results.delete(0, END)
     swaps = True
     while swaps:
     # Put in value of swaps before the algorithm has worked through the list comparing descriptions
     #
     # Work through the list
-        swap = False
+        swaps = False
         for position in range(0,len(employee_list)-1):
             # If the description of list[position] is greater (alphabetically) that list[position+1]
             if employee_list[position].get_employee_forename() > employee_list[position+1].get_employee_forename():
@@ -27,25 +28,33 @@ def sort_by_forename():
                 temp = employee_list[position]
                 employee_list[position] = employee_list[position+1]
                 employee_list[position +1] = temp
+    for position in range(0,len(employee_list)-1):
+        lst_results.insert(position,employee_list[position].get_employee_forename()+ " "+employee_list[position].get_mobile_number())
 
 
 def sort_by_surname():
     print('Sorting by surname')
+    lst_results.delete(0, END)
     swaps = True
     while swaps:
     # Put in value of swaps before the algorithm has worked through the list comparing descriptions
     #
     # Work through the list
-        swap = False
+        swaps = False
         for position in range(0,len(employee_list)-1):
+            print(position)
             # If the description of list[position] is greater (alphabetically) that list[position+1]
             if employee_list[position].get_employee_surname() > employee_list[position+1].get_employee_surname():
                 swaps = True
                 temp = employee_list[position]
                 employee_list[position] = employee_list[position+1]
                 employee_list[position +1] = temp
+    for position in range(0,len(employee_list)-1):
+        lst_results.insert(position,employee_list[position].get_employee_surname()+ " "+employee_list[position].get_mobile_number())
+
 
 def find_by_name():
+    lst_results.delete(0, END)
     surname = txt_surname.get()
 
     found = False
@@ -61,14 +70,30 @@ def find_by_name():
         else:
             employee_in_list += 1
 
-    lst_results.insert(1,employee_list[employee_in_list].get_mobile_number())
+    if found:
+        lst_results.insert(1,employee_list[employee_in_list].get_mobile_number())
 
+    wid = 50
 
 def backup():
-    print('Backing up')
+    backupfile=open("employee.csv","r")
+    data = backupfile.read()
+    print(data)
+    backupfile.close()
+    newFile = open("employee_copy.csv","w")
+    newFile.write(data)
+    newFile.close()
+
 
 def recover():
-    print('Recovering')
+    backupfile=open("employee_copy.csv","r")
+    data = backupfile.read()
+    print(data)
+    backupfile.close()
+    newFile = open("employee.csv","w")
+    newFile.write(data)
+    newFile.close()
+
 
 load_employee_file_into_array()
 
